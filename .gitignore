@@ -1,0 +1,22 @@
+# exclude everything
+/.idea
+/newv
+
+/TP1/data/train/*
+/TP1/data/validation/*
+/TP1/logs/*
+/TP1/model_keras.h5
+/TP1/model_weights.h5
+
+/TP1_Exo/data/train/*
+/TP1_Exo/data/valid/*
+/TP1_Exo/data/test/*
+/TP1_Exo/logs/*
+/TP1_Exo/model_keras.h5
+/TP1_Exo/model_weights.h5
+
+
+
+# exception to the rule
+!/TP1/data/train/.gitkeep
+!/TP1/data/validation/.gitkeep
