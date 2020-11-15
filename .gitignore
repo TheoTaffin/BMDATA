@@ -20,3 +20,6 @@
 # exception to the rule
 !/TP1/data/train/.gitkeep
 !/TP1/data/validation/.gitkeep
+!/TP1_Exo/data/train/.gitkeep
+!/TP1_Exo/data/valid/.gitkeep
+!/TP1_Exo/data/test/.gitkeep
