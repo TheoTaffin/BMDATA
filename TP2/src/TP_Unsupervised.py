@@ -103,4 +103,15 @@ for i in range(n_filters):
 plt.show()
 
 
+### Visualizing a few images and their
+nb_image = 3
+ix = 1
+ax = plt.subplot(nb_image, 2, ix)
+for i in range(nb_image):
+    lst = [model.predict(np.expand_dims(X_train_c_r_n[i], axis=0))[0], X_train_c_r_n[i]]
+    for j in range(2):
+        ax = plt.subplot(nb_image, 2, ix)
+        plt.imshow(lst[j])
+        ix += 1
 
+plt.show()
