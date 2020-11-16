@@ -103,7 +103,7 @@ for i in range(n_filters):
 plt.show()
 
 
-### Visualizing a few images and their
+### Visualizing a few images and their predictions
 nb_image = 3
 ix = 1
 ax = plt.subplot(nb_image, 2, ix)
