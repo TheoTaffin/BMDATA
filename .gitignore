@@ -15,7 +15,8 @@
 /TP1_Exo/model_keras.h5
 /TP1_Exo/model_weights.h5
 
-
+/TP2/model/*
+/TP2/data/*
 
 # exception to the rule
 !/TP1/data/train/.gitkeep
@@ -23,3 +24,5 @@
 !/TP1_Exo/data/train/.gitkeep
 !/TP1_Exo/data/valid/.gitkeep
 !/TP1_Exo/data/test/.gitkeep
+!/TP2/model/.gitkeep
+!/TP2/data/.gitkeep

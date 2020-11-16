@@ -101,14 +101,15 @@ model.add(layers.Dense(units=256, activation='relu', input_dim=7 * 7 * 512))
 model.add(layers.Dropout(0.5))
 model.add(layers.Dense(8, activation="softmax"))
 
+
 ### compiling the model
-model.compile(optimizer='adam',
+model.compile(optimizer="adam",
               loss=tf.keras.losses.CategoricalCrossentropy(),
               metrics=['accuracy'])
 
 ### Making a TensorBoard callback object
 NAME = "CNN_FromVGG16"
-tensorboard = TensorBoard(log_dir=f"logs/{NAME}")
+tensorboard = TensorBoard(log_dir=f"logs/{NAME}adam")
 
 history = model.fit(x=train_features, y=train_labels,
                     steps_per_epoch=len(train_features) // batch_size,
