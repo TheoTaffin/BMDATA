@@ -22,18 +22,6 @@ root_folder = "C:/Users/Theo/PycharmProjects/"
 X_train, y_train, X_test, y_test = stl_load_stl10(stl10_folder)
 
 
-# normalize 0 - 1
-def normalize_0_1(images):
-
-    tmp = np.zeros(shape=(len(images), 96, 96, 3), dtype=np.uint8)
-
-    for count, image in enumerate(images):
-        nor = image / image.max()
-        tmp[count] = nor
-
-    return tmp
-
-
 X_train_n = (X_train/255)
 X_test_n = (X_test/255)
 
