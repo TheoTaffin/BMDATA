@@ -22,22 +22,23 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
 from tensorflow.keras.callbacks import TensorBoard
 
-
-train_dir = "data/train"
-valid_dir = "data/valid"
-test_dir = "data/test"
+wdir = "C:/Users/Theo/PycharmProjects/BMDATA/TP1_Exo"
+train_dir = os.path.join(wdir, "data/train")
+valid_dir = os.path.join(wdir, "data/valid")
+test_dir = os.path.join(wdir, "data/test")
 
 
 def extract(directory_path):
     dir_dict = {}
     tmp_list = []
     for directory in os.listdir(directory_path):
-        sub_dir = os.path.join(directory_path, directory)
-        for file in os.listdir(sub_dir):
-            tmp_list.append(f"{sub_dir}/{file}")
+        if not directory.endswith('.gitkeep'):
+            sub_dir = os.path.join(directory_path, directory)
+            for file in os.listdir(sub_dir):
+                tmp_list.append(f"{sub_dir}/{file}")
 
-        dir_dict[directory] = tmp_list.copy()
-        tmp_list.clear()
+            dir_dict[directory] = tmp_list.copy()
+            tmp_list.clear()
 
     return dir_dict
 
