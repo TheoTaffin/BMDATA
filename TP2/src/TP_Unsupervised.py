@@ -66,7 +66,7 @@ conv1 = layers.Conv2D(filters=128, kernel_size=(5, 5), input_shape=(96, 96, 3),
 maxpool1 = layers.MaxPooling2D(pool_size=(2, 2))
 
 conv2 = layers.Conv2D(filters=128, kernel_size=(5, 5), input_shape=(96, 96, 3),
-                      weights=[conv2_weights, conv2_bias], activation='sigmoid')
+                      activation='sigmoid', weights=[conv2_weights, conv2_bias])
 maxpool2 = layers.MaxPooling2D(pool_size=(2, 2))
 
 tr_conv1 = layers.Conv2DTranspose(filters=128, kernel_size=(5, 5), strides=(2, 2), padding='same',
@@ -77,3 +77,30 @@ tr_conv2 = layers.Conv2DTranspose(filters=3, kernel_size=(5, 5), strides=(2, 2),
 model = models.Sequential([conv1, maxpool1, conv2, maxpool2, tr_conv1, tr_conv2])
 model.compile()
 model.summary()
+
+
+### filter visualization
+# retrieve weights from the first hidden layer
+filters, biases = model.layers[0].get_weights()
+# normalize filter values to 0-1 so we can visualize them
+f_min, f_max = filters.min(), filters.max()
+filters = (filters - f_min) / (f_max - f_min)
+# plot first few filters
+n_filters, ix = 6, 1
+for i in range(n_filters):
+    # get the filter
+    f = filters[:, :, :, i]
+    # plot each channel separately
+    for j in range(3):
+        # specify subplot and turn of axis
+        ax = plt.subplot(n_filters, 3, ix)
+        ax.set_xticks([])
+        ax.set_yticks([])
+        # plot filter channel in grayscale
+        plt.imshow(f[:, :, j], cmap='gray')
+        ix += 1
+# show the figure
+plt.show()
+
+
+
