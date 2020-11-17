@@ -23,6 +23,8 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
 from tensorflow.keras.callbacks import TensorBoard
 
+# to avoid tf crashes
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 ## weights : to specify which weight checkpoint to initialize the model from
 ## include_top : refers to whether or not include densely connected classifier on top of the 
@@ -119,7 +121,6 @@ history = model.fit(x=train_features, y=train_labels,
                     )
 
 # To test the model on some images from the test set :
-
 test_datagen = ImageDataGenerator(rescale=1./255)
 
 text_labels = []
