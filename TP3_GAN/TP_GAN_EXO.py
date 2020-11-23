@@ -222,7 +222,7 @@ save_fake_images(0)
 
 # We can now train the model. In each epoch, we train the discriminator first and then the
 # generator.
-num_epochs = 50
+num_epochs = 150
 total_step = len(data_loader)
 d_losses, g_losses, real_scores, fake_scores = [], [], [], []
 
@@ -256,6 +256,19 @@ torch.save(G.state_dict(), "G.ckpt")
 torch.save(D.state_dict(), "D.ckpt")
 
 
-# We can tyhen visualize how the loss changed over time. This is quite useful for debugging the
+# We can then visualize how the loss changed over time. This is quite useful for debugging the
 # training process. For GANs, we expect  the generator's loss to reduce over time without the
 # discriminator's loss getting too high
+plt.plot(d_losses, '-')
+plt.plot(g_losses, '-')
+plt.xlabel('epoch')
+plt.ylabel('loss')
+plt.legend(['Discriminator', 'Generator'])
+plt.title('Losses')
+
+plt.plot(real_scores, '-')
+plt.plot(fake_scores, '-')
+plt.xlabel('epoch')
+plt.ylabel('score')
+plt.legend(['Real Score', 'Fake score'])
+plt.title('Scores')

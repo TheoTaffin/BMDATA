@@ -18,6 +18,9 @@
 /TP2/model/*
 /TP2/data/*
 
+TP3_GAN/data/*
+TP3_GAN/samples/*
+
 # exception to the rule
 !/TP1/data/train/.gitkeep
 !/TP1/data/validation/.gitkeep
@@ -26,3 +29,6 @@
 !/TP1_Exo/data/test/.gitkeep
 !/TP2/model/.gitkeep
 !/TP2/data/.gitkeep
+/TP3_GAN/TP_GAN_EXO.ipynb
+/TP3_GAN/G.ckpt
+/TP3_GAN/D.ckpt
