@@ -235,7 +235,6 @@ for epoch in range(num_epochs):
         d_loss, real_score, fake_score = train_discriminator(images_conv)
         g_loss, fake_images = train_generator()
 
-
         # checking on the losses
         if (count+1) % 200 == 0:
             d_losses.append(d_loss.item())

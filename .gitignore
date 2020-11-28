@@ -32,3 +32,9 @@ TP3_GAN/samples/*
 /TP3_GAN/TP_GAN_EXO.ipynb
 /TP3_GAN/G.ckpt
 /TP3_GAN/D.ckpt
+/TP4/faceimages/
+/TP4/landmarks/
+/TP4/haarcascade_frontalface_default.xml
+/TP4/shape_predictor_68_face_landmarks.dat
+/TP1_NLP/review_polarity/txt_sentoken/
+/TP1_NLP/review_polarity/
