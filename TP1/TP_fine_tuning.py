@@ -53,7 +53,7 @@ val_generator = val_datagen.flow_from_directory(
 conv_base = vgg16.VGG16(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
 
 ### We freeze the layer we don't want to train, we will just fine tune the last 4 layers
-for layer in conv_base.layers[:-4]:
+for layer in conv_base.layers:
     layer.trainable = False
 
 # Check the trainable status of the individual layers

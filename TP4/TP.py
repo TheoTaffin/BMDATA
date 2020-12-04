@@ -14,65 +14,65 @@ from tensorflow.keras import layers
 
 root_folder = "C:/Users/Theo/PycharmProjects/BMDATA"
 
-# ### Data importation
-# faceimages_data_train = np.load(os.path.join(root_folder, "TP4/faceimages/images_train.npy"))
-# faceimages_data_test = np.load(os.path.join(root_folder, "TP4/faceimages/images_test.npy"))
-# faceimages_labels_train = np.load(os.path.join(root_folder, "TP4/faceimages/labels_train.npy"))
-# faceimages_labels_train_labels_test = np.load(os.path.join(root_folder,
-#                                                            "TP4/faceimages/labels_test.npy"))
-#
-# landmarks_x_train = np.load(os.path.join(root_folder, "TP4/landmarks/x_train.npy"))
-# landmarks_x_test = np.load(os.path.join(root_folder, "TP4/landmarks/x_test.npy"))
-# landmarks_y_train = np.load(os.path.join(root_folder, "TP4/landmarks/y_train.npy"))
-# landmarks_y_test = np.load(os.path.join(root_folder, "TP4/landmarks/y_test.npy"))
-#
-#
-# ### Model implementation
-# model = tf.keras.Sequential()
-# model.add(layers.Dense(units=512, activation='relu', input_dim=68*68))
-# model.add(layers.Dense(units=512, activation='relu'))
-# model.add(layers.Dense(units=512, activation='relu'))
-# model.add(layers.Dense(units=512, activation='relu'))
-# model.add(layers.Dense(units=512, activation='relu'))
-# model.add(layers.Dense(units=7, activation='softmax'))
-# model.compile()
-# model.summary()
-#
-# ### Model fit
-# model.compile(optimizer="adam",
-#               loss=tf.keras.losses.CategoricalCrossentropy(),
-#               metrics=['accuracy'])
-#
-# history = model.fit(x=landmarks_x_train, y=landmarks_y_train, epochs=40,
-#                     validation_data=(landmarks_x_test, landmarks_y_test))
-#
-#
-# ### Plot some graphs of accuracy and loss in both the train and validation set to see if we can
-# # get some insight
-# # plotting train and val curve, we can get those value form the history object
-# acc = history.history['accuracy']
-# val_acc = history.history['val_accuracy']
-# loss = history.history['loss']
-# val_loss = history.history['val_loss']
-#
-# epochs = range(1, len(acc) + 1)
-#
-# # Train an validation accuracy
-# plt.plot(epochs, acc, "b", label='Training accuracy')
-# plt.plot(epochs, val_acc, "r", label='Validation accuracy')
-# plt.title('Training and validation accuracy')
-# plt.legend()
-# plt.figure()
-# plt.show()
-#
-# # Train an validation loss
-# plt.plot(epochs, loss, "b", label='Training loss')
-# plt.plot(epochs, val_loss, "r", label='Validation loss')
-# plt.title('Training and validation loss')
-# plt.legend()
-# plt.figure()
-#
-# plt.show()
+### Data importation
+faceimages_data_train = np.load(os.path.join(root_folder, "TP4/faceimages/images_train.npy"))
+faceimages_data_test = np.load(os.path.join(root_folder, "TP4/faceimages/images_test.npy"))
+faceimages_labels_train = np.load(os.path.join(root_folder, "TP4/faceimages/labels_train.npy"))
+faceimages_labels_train_labels_test = np.load(os.path.join(root_folder,
+                                                           "TP4/faceimages/labels_test.npy"))
+
+landmarks_x_train = np.load(os.path.join(root_folder, "TP4/landmarks/x_train.npy"))
+landmarks_x_test = np.load(os.path.join(root_folder, "TP4/landmarks/x_test.npy"))
+landmarks_y_train = np.load(os.path.join(root_folder, "TP4/landmarks/y_train.npy"))
+landmarks_y_test = np.load(os.path.join(root_folder, "TP4/landmarks/y_test.npy"))
+
+
+### Model implementation
+model = tf.keras.Sequential()
+model.add(layers.Dense(units=512, activation='relu', input_dim=68*68))
+model.add(layers.Dense(units=512, activation='relu'))
+model.add(layers.Dense(units=512, activation='relu'))
+model.add(layers.Dense(units=512, activation='relu'))
+model.add(layers.Dense(units=512, activation='relu'))
+model.add(layers.Dense(units=7, activation='softmax'))
+model.compile()
+model.summary()
+
+### Model fit
+model.compile(optimizer="adam",
+              loss=tf.keras.losses.CategoricalCrossentropy(),
+              metrics=['accuracy'])
+
+history = model.fit(x=landmarks_x_train, y=landmarks_y_train, epochs=40,
+                    validation_data=(landmarks_x_test, landmarks_y_test))
+
+
+### Plot some graphs of accuracy and loss in both the train and validation set to see if we can
+# get some insight
+# plotting train and val curve, we can get those value form the history object
+acc = history.history['accuracy']
+val_acc = history.history['val_accuracy']
+loss = history.history['loss']
+val_loss = history.history['val_loss']
+
+epochs = range(1, len(acc) + 1)
+
+# Train an validation accuracy
+plt.plot(epochs, acc, "b", label='Training accuracy')
+plt.plot(epochs, val_acc, "r", label='Validation accuracy')
+plt.title('Training and validation accuracy')
+plt.legend()
+plt.figure()
+plt.show()
+
+# Train an validation loss
+plt.plot(epochs, loss, "b", label='Training loss')
+plt.plot(epochs, val_loss, "r", label='Validation loss')
+plt.title('Training and validation loss')
+plt.legend()
+plt.figure()
+
+plt.show()
 
 model = tf.keras.models.load_model(os.path.join(root_folder, 'TP4/model_keras.h5'))
 model.load_weights(os.path.join(root_folder, 'TP4/model_weights.h5'))

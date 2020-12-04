@@ -6,9 +6,8 @@ import os
 from scipy import stats
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder
 
-import tensorflow as tf
+
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
@@ -89,26 +88,18 @@ def segment_signal(data, window_size=90):
     return segments, labels
 
 
-# data = import_data(os.path.join(root_dir, "TP_TIMESERIES/WISDM/WISDM_raw.txt"))
-# data['z-axis'] = data['z-axis'].str.replace(";", "")
-# data = normalize_features(data, ['x-axis', 'y-axis', 'z-axis'])
-# data['z-axis'].fillna(0, inplace=True)
-#
-# for activity in np.unique(data['activity']):
-#     subset = data[data['activity'] == activity][:180]
-#     plot_activity(activity, subset)
-#
-# segments, labels = segment_signal(data)
-# labels = pd.get_dummies(labels)
-#
-# np.save('segments', segments)
-# np.save('label', labels)
-# train_size = int((0.8*len(segments)))
+data = import_data(os.path.join(root_dir, "TP3/WISDM/WISDM_raw.txt"))
+data['z-axis'] = data['z-axis'].str.replace(";", "")
+data = normalize_features(data, ['x-axis', 'y-axis', 'z-axis'])
+data['z-axis'].fillna(0, inplace=True)
 
-# x_train = segments[0:train_size]
-# y_train = labels[0:train_size]
-# x_test = segments[train_size:len(segments)]
-# y_test = labels[train_size:len(segments)]
+for activity in np.unique(data['activity']):
+    subset = data[data['activity'] == activity][:180]
+    plot_activity(activity, subset)
+
+#### Getting training and validation sets
+segments, labels = segment_signal(data)
+labels = pd.get_dummies(labels)
 
 
 # to avoid tf crashes
@@ -152,6 +143,7 @@ def test_model(epochs, batch_size, title, lst_layers, x_train_t, x_val_t,  y_tra
     return acc, val_acc, loss, val_loss
 
 
+#### Function that allows us to grid search the best hyper parameters (epochs and batch_size)
 def grid_search(epochs_list, batch_size_list, cls, title, data=None):
 
     grid = {}
@@ -173,7 +165,7 @@ epochs = 16
 batch_size = 16
 
 
-# # ### Model creation
+### Model creation
 m1_conv2d_1 = layers.Conv2D(filters=128, kernel_size=(2, 2), activation='relu',
                             input_shape=(90, 3, 1))
 m1_max_pooling2d_1 = layers.MaxPool2D(pool_size=(2, 2))
@@ -198,7 +190,7 @@ m2_dropout_3 = layers.Dropout(0.5)
 m2_dense_2 = layers.Dense(units=6, activation='softmax')
 
 m2_layers = [m2_lstm_1, m2_dropout_1, m2_batch_normalization_1, m2_lstm_2, m2_dropout_2,
-                    m2_batch_normalization_2,  m2_dense_1, m2_dropout_3, m2_dense_2]
+             m2_batch_normalization_2,  m2_dense_1, m2_dropout_3, m2_dense_2]
 
 
 ### Model creation 3
@@ -212,22 +204,19 @@ m3_dropout_1 = layers.Dropout(0.5)
 m3_dense_2 = layers.Dense(units=6, activation='softmax')
 
 m3_layers = [m3_conv1d_1, m3_conv1d_2, m3_max_pooling1d_1, m3_conv1d_3, m3_conv1d_4,
-            m3_global_average_pooling1d_1, m3_dropout_1, m3_dense_2]
-
-
-segments, labels = np.load(os.path.join(root_dir, 'TP_TIMESERIES/src/segments.npy')), \
-                   np.load(os.path.join(root_dir, 'TP_TIMESERIES/src/labels.npy'))
+             m3_global_average_pooling1d_1, m3_dropout_1, m3_dense_2]
 
 
 segments_cnn1 = segments.reshape((segments.shape[0], segments.shape[1], segments.shape[2], 1))
 
-x_train_cn1, x_valn_cn1, y_train_cn1, y_valn_cn1 = train_test_split(segments_cnn1, labels, test_size=0.2,
-                                                    random_state=2)
+x_train_cn1, x_valn_cn1, y_train_cn1, y_valn_cn1 = train_test_split(segments_cnn1, labels,
+                                                                    test_size=0.2,
+                                                                    random_state=2)
 x_train, x_val, y_train, y_val = train_test_split(segments, labels, test_size=0.2, random_state=2)
 
-# test_model(epochs, batch_size, "cnn1", m1_layers, x_train_cn1, x_valn_cn1, y_train_cn1, y_valn_cn1)
-# test_model(epochs, batch_size, "rnn1", m2_layers, x_train, x_val, y_train, y_val)
-# test_model(epochs, batch_size, "cnn2", m3_layers, x_train, x_val, y_train, y_val)
+test_model(epochs, batch_size, "cnn1", m1_layers, x_train_cn1, x_valn_cn1, y_train_cn1, y_valn_cn1)
+test_model(epochs, batch_size, "rnn1", m2_layers, x_train, x_val, y_train, y_val)
+test_model(epochs, batch_size, "cnn2", m3_layers, x_train, x_val, y_train, y_val)
 
 # test = grid_search([8, 16], [8, 16], m1_layers, "CNN2D")
 

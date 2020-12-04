@@ -30,32 +30,32 @@ X_train, y_train, X_test, y_test = stl_load_stl10(stl10_folder)
 
 
 ####################################### normalization #############################################
-X_train_n = (X_train/255)
-X_test_n = (X_test/255)
-
-del X_train
-del X_test
-gc.collect()
-
-mean_x_train = X_train_n.mean()
-std_x_train = X_train_n.std()
-
-X_train_c = (X_train_n - mean_x_train) / std_x_train
-X_test_c = (X_test_n - mean_x_train) / std_x_train
-
-del X_train_n
-del X_test_n
-gc.collect()
-
-mini = X_train_c.min()
-maxi = X_train_c.max() - mini
-
-X_train_c_r_n = (X_train_c - mini) / maxi
-X_test_c_r_n = (X_test_c - mini) / maxi
-
-del X_train_c
-del X_test_c
-gc.collect()
+# X_train_n = (X_train/255)
+# X_test_n = (X_test/255)
+#
+# del X_train
+# del X_test
+# gc.collect()
+#
+# mean_x_train = X_train_n.mean()
+# std_x_train = X_train_n.std()
+#
+# X_train_c = (X_train_n - mean_x_train) / std_x_train
+# X_test_c = (X_test_n - mean_x_train) / std_x_train
+#
+# del X_train_n
+# del X_test_n
+# gc.collect()
+#
+# mini = X_train_c.min()
+# maxi = X_train_c.max() - mini
+#
+# X_train_c_r_n = (X_train_c - mini) / maxi
+# X_test_c_r_n = (X_test_c - mini) / maxi
+#
+# del X_train_c
+# del X_test_c
+# gc.collect()
 ###################################################################################################
 
 ############################### Weight and biases loading #########################################

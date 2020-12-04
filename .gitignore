@@ -38,3 +38,6 @@ TP3_GAN/samples/*
 /TP4/shape_predictor_68_face_landmarks.dat
 /TP1_NLP/review_polarity/txt_sentoken/
 /TP1_NLP/review_polarity/
+/TP1_NLP/src/neg_vocab.txt
+/TP1_NLP/src/pos_vocab.txt
+/TP1_NLP/vocab.txt

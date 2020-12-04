@@ -1,12 +1,10 @@
 # Data manipulation libraries
 import cv2
 import numpy as np
-import pandas as pd
 from sklearn.model_selection import train_test_split
 
 # Data visualization library
 import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 
 # Native libraries
 import os
@@ -112,7 +110,6 @@ del X
 del y
 gc.collect()
 
-
 #get the length of the train and validation data
 ntrain = len(X_train)
 nval = len(X_val)
@@ -125,10 +122,11 @@ batch_size = 32
 # as we go down in layers (32 -> 64 -> 128 -> 512 and finally 1)
 
 model = models.Sequential()
-model.add(layers.Conv2D(filters=32, kernel_size=(3, 3), activation='relu', input_shape=(200,
+model.add(layers.Conv2D(filters=5, kernel_size=(7, 7),activation='relu', input_shape=(
+    200,
                                                                                         200, 3)))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
-model.add(layers.Conv2D(filters=64, kernel_size=(3, 3), activation='relu'))
+model.add(layers.Conv2D(filters=64, kernel_size=(7, 7), activation='relu'))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
 model.add(layers.Conv2D(filters=128, kernel_size=(3, 3), activation='relu'))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
